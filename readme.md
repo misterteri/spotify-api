@@ -1,19 +1,27 @@
-What I want to learn in this project:
+What I learned in this project:
 
-- How to use an API with real data
-- How to implement ML models based on data collected from an API
+- API calls
+- library: spotipy
+- data cleaning, data manipulation
+- data visualization
+- clustering
+- model evaluation
 
 What I use in this project:
 Tech:
 
 - Python
 - Pandas
+- Numpy
 - Scikit-learn
+- Spotipy
+- dotenv (for environment variables)
 
 API:
 
 - Spotify API
 
-Models:
+Visualization:
 
-- KMeans
+- Matplotlib: subplots, histplot
+- Seaborn: heatmap, pairplot
