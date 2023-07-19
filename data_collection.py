@@ -5,6 +5,7 @@ import time
 import pandas as pd
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
+import pickle
 
 from dotenv import load_dotenv
 import os
@@ -32,7 +33,10 @@ techno_songs = pd.DataFrame(columns=['song_name', 'artist_name', 'danceability',
 
 # %%
 # iterate through playlists and print all playlist names
+# make a guard for playlists with the same name
 for i, playlist in enumerate(techno_lists['playlists']['items']):
+    if playlist['name'] in [x['name'] for x in techno_playlists]:
+        continue
     print("%4d %s %s" % (i + 1, playlist['uri'], playlist['name']))
     techno_playlists.append(sp.playlist(playlist['uri']))
 # %%
@@ -71,7 +75,11 @@ for i, playlist in enumerate(techno_playlists):
             feature_keys = ['danceability', 'energy', 'key', 'loudness', 'mode',
                             'speechiness', 'acousticness', 'instrumentalness',
                             'liveness', 'valence', 'tempo']
+            # guard for features being NoneType
             if any(features.get(key) is None for key in feature_keys):
+                continue
+            # guard for name and artist being NoneType
+            if tracks[j+k]['track'] is None or tracks[j+k]['track']['name'] is None or tracks[j+k]['track']['artists'][0]['name'] is None:
                 continue
             # get the song name and artist
             song_name = tracks[j+k]['track']['name']
@@ -203,3 +211,5 @@ print(train_songs[train_songs['like'] == 0])
 # print test_songs with like value 0
 print("Testing songs with like value 0:")
 print(test_songs[test_songs['like'] == 0])
+
+# %%
