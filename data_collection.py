@@ -213,3 +213,13 @@ print("Testing songs with like value 0:")
 print(test_songs[test_songs['like'] == 0])
 
 # %%
+# save all the data to csv files
+techno_songs.to_csv('techno_songs.csv', index=False)
+train_songs.to_csv('train_songs.csv', index=False)
+test_songs.to_csv('test_songs.csv', index=False)
+# techno_playlists.to_csv('techno_playlists.csv', index=False)
+
+# %%
+# add all songs onto 1 csv file called all_songs.csv
+all_songs = pd.concat([techno_songs, train_songs, test_songs])
+all_songs.to_csv('all_songs.csv', index=False)
